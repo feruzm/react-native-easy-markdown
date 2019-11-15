@@ -243,7 +243,7 @@ class Markdown extends Component {
 
         const { styles } = this.state;
         
-        if (node.type === 'em') console.log('node.type is emphasis');
+        console.log(`node.type in renderNode is ${nodeType}`);
 
         switch (node.type) {
             case 'h1': return this.renderText(node, key, Utils.concatStyles(extras, styles.h1), 'h1' );
