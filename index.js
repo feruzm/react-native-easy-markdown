@@ -152,7 +152,15 @@ class Markdown extends Component {
         if (node.props) {
             if (this.props.renderText) {
                 return <React.Fragment>
-                    {this.renderNodes(node.props.children, key, extras)}
+                    {
+                        node.props.children.map((node) => {
+                            if (typeof node === 'string') {
+                                return this.renderText(node);
+                            } else {
+                                return this.renderNodes(node, key, extras);
+                            }
+                        })
+                    }
                 </React.Fragment>
             }
             return (
