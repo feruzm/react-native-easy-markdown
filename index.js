@@ -140,11 +140,11 @@ class Markdown extends Component {
     }
 
     renderText(node, key, extras, textType) {
-        if (textType === 'em') console.log('found emphasis text');
         const { styles } = this.state;
 
         let style = (extras && extras.style) ? [styles.text].concat(extras.style) : styles.text;
 
+        console.log('in render text with node type: ', textType);
         if (textType == 'strong' || textType == 'em') {
             console.log('node: ', node);
         }
