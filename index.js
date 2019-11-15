@@ -145,6 +145,10 @@ class Markdown extends Component {
 
         let style = (extras && extras.style) ? [styles.text].concat(extras.style) : styles.text;
 
+        if (textType == 'strong' || textType == 'em') {
+            console.log('node: ', node);
+        }
+
         if (node.props) {
             if (this.props.renderText) {
                 return <React.Fragment>
