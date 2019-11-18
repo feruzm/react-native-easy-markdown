@@ -151,18 +151,10 @@ class Markdown extends Component {
 
         if (node.props) {
             if (this.props.renderText) {
-                return <React.Fragment>
-                    {
-                        node.props.children.map((node) => {
-                            if (typeof node === 'string') {
-                                return this.renderText(node);
-                            } else {
-                                return this.renderNodes(node, key, extras);
-                            }
-                        })
-                    }
-                </React.Fragment>
+                console.log('calling props render text for text tpye:', textType);
+                return this.props.renderText(node, textType, node.props);
             }
+            console.log('calling interal render nodes  render text for text type with children', textType);
             return (
                 <Text key={key} style={style}>
                     {this.renderNodes(node.props.children, key, extras)}
@@ -170,8 +162,10 @@ class Markdown extends Component {
             );
         } else {
             if (this.props.renderText) {
+                console.log('calling props render w/ textType', textType)
                 return this.props.renderText(node, textType)
             }
+            console.log('using internal text component for textType', textType)
             return (
                 <Text key={key} style={style}>{node}</Text>
             );
