@@ -144,17 +144,17 @@ class Markdown extends Component {
 
         let style = (extras && extras.style) ? [styles.text].concat(extras.style) : styles.text;
 
-        console.log('in render text with node type: ', textType, node);
+        if (this.props.debug) console.log('in render text with node type: ', textType, node);
         if (textType == 'strong' || textType == 'em') {
             console.log('node: ', node);
         }
 
         if (node.props) {
             if (this.props.renderText) {
-                console.log('calling props render text for text tpye:', textType);
+                if (this.props.debug) console.log('calling props render text for text tpye:', textType);
                 return this.props.renderText(node, textType, node.props);
             }
-            console.log('calling interal render nodes  render text for text type with children', textType);
+            if (this.props.debug) console.log('calling interal render nodes  render text for text type with children', textType);
             return (
                 <Text key={key} style={style}>
                     {this.renderNodes(node.props.children, key, extras)}
@@ -162,10 +162,10 @@ class Markdown extends Component {
             );
         } else {
             if (this.props.renderText) {
-                console.log('calling props render w/ textType', textType)
+                if (this.props.debug) console.log('calling props render w/ textType', textType)
                 return this.props.renderText(node, textType)
             }
-            console.log('using internal text component for textType', textType)
+            if (this.props.debug) console.log('using internal text component for textType', textType)
             return (
                 <Text key={key} style={style}>{node}</Text>
             );
@@ -173,7 +173,7 @@ class Markdown extends Component {
     }
 
     renderLink(node, key) {
-        console.log('rendering link');
+        if (this.props.debug)  console.log('rendering link');
         const { styles } = this.state;
         let extras = Utils.concatStyles(null, styles.link);
         let children = this.renderNodes(node.props.children, key, extras);
@@ -198,7 +198,7 @@ class Markdown extends Component {
 
     renderBlock(node, key, extras) {
         const { styles } = this.state;
-        console.log('rendering block');
+
         let style = [styles.block];
         let isBlockQuote;
         if (extras && extras.blockQuote) {
@@ -231,6 +231,7 @@ class Markdown extends Component {
             );
         }
         else {
+            if (this.props.debug) console.log('block children: ', children);
             if (this.props.renderBlock) {
                 return this.props.renderBlock(children);
             }
@@ -249,7 +250,7 @@ class Markdown extends Component {
 
         const { styles } = this.state;
 
-        console.log('rendering node: ', node);
+        if (this.props.debug) console.log('rendering node: ', node);
 
         switch (node.type) {
             case 'h1': return this.renderText(node, key, Utils.concatStyles(extras, styles.h1), 'h1' );
