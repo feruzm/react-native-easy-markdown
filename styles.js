@@ -46,6 +46,9 @@ const defaultStyles = {
         backgroundColor: '#333333',
         marginVertical: 8,
     },
+    code: {
+        backgroundColor: '#333333',
+    },
     text: {
         alignSelf: 'flex-start'
     },
