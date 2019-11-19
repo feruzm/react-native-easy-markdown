@@ -144,17 +144,10 @@ class Markdown extends Component {
 
         let style = (extras && extras.style) ? [styles.text].concat(extras.style) : styles.text;
 
-        if (this.props.debug) console.log('in render text with node type: ', textType, node);
-        // if (textType == 'strong' || textType == 'em') {
-        //     console.log('node: ', node);
-        // }
-
         if (node.props) {
             if (this.props.renderText) {
-                if (this.props.debug) console.log('calling props render text for text tpye:', textType);
                 return this.props.renderText(node, textType, node.props);
             }
-            if (this.props.debug) console.log('calling interal render nodes  render text for text type with children', textType);
             return (
                 <Text key={key} style={style}>
                     {this.renderNodes(node.props.children, key, extras)}
@@ -162,10 +155,8 @@ class Markdown extends Component {
             );
         } else {
             if (this.props.renderText) {
-                if (this.props.debug) console.log('calling props render w/ textType', textType)
                 return this.props.renderText(node, textType)
             }
-            if (this.props.debug) console.log('using internal text component for textType', textType)
             return (
                 <Text key={key} style={style}>{node}</Text>
             );
@@ -173,7 +164,6 @@ class Markdown extends Component {
     }
 
     renderLink(node, key) {
-        if (this.props.debug)  console.log('rendering link');
         const { styles } = this.state;
         let extras = Utils.concatStyles(null, styles.link);
         let children = this.renderNodes(node.props.children, key, extras);
@@ -212,7 +202,6 @@ class Markdown extends Component {
         const children = this.renderNodes(node.props.children, key, extras);
 
         if (isBlockQuote) {
-            style.push(styles.blockQuote)
             if (this.props.renderBlockQuote) {
                 return this.props.renderBlockQuote(children)
             }
@@ -231,7 +220,6 @@ class Markdown extends Component {
             );
         }
         else {
-            if (this.props.debug) console.log('block children: ', children);
             if (this.props.renderBlock) {
                 return this.props.renderBlock(children);
             }
