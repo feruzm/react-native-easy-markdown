@@ -123,6 +123,7 @@ class Markdown extends Component {
         let children = this.renderNodes(node.props.children, key, extras);
 
         if (this.props.renderListItem) {
+            const { ordered } = extras;
             // Unsure if the consuming function should make its own keys and indexes in their list?
             return this.props.renderListItem(index, key, ordered, children);
         }
