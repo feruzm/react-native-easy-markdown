@@ -90,7 +90,7 @@ class Markdown extends Component {
         const { styles } = this.state;
 
         if (this.props.renderList) {
-            const children = node.props.children.map((node) => this.renderNodes(node, key, { ordered }));
+            const children = this.renderNodes(node.props.children, key, { ordered });
             return this.props.renderList(ordered, children);
         }
 
