@@ -90,7 +90,7 @@ class Markdown extends Component {
         const { styles } = this.state;
 
         if (this.props.renderList) {
-            const children = node.props.children.map((node) => this.renderNodes(node, key, { ordered }));
+            const children = this.renderNodes(node.props.children, key, { ordered });
             return this.props.renderList(ordered, children);
         }
 
@@ -123,6 +123,7 @@ class Markdown extends Component {
         let children = this.renderNodes(node.props.children, key, extras);
 
         if (this.props.renderListItem) {
+            const { ordered } = extras;
             // Unsure if the consuming function should make its own keys and indexes in their list?
             return this.props.renderListItem(index, key, ordered, children);
         }
